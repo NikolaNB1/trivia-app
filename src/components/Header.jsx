@@ -16,6 +16,11 @@ const Header = () => {
               Chuck
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to="/trivia" className="nav-link" aria-current="page">
+              Trivia
+            </Link>
+          </li>
         </ul>
       </header>
     </div>

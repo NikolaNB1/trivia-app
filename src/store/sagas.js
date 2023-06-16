@@ -1,7 +1,9 @@
-import * as counterSagas from "./counter/saga";
+import * as chuckSagas from "./chuck/saga";
+import * as triviaSagas from "./trivia/saga";
 
 const sagas = {
-  ...counterSagas,
+  ...chuckSagas,
+  ...triviaSagas,
 };
 
 export default sagas;
