@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <div className="container">
@@ -8,6 +10,13 @@ const Header = () => {
         >
           <span className="navbar-brand">Trivia app</span>
         </a>
+        <ul className="nav nav-pills">
+          <li className="nav-item">
+            <Link to="/chuck" className="nav-link" aria-current="page">
+              Chuck
+            </Link>
+          </li>
+        </ul>
       </header>
     </div>
   );
