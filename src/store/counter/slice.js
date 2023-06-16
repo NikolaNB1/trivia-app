@@ -2,16 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const middlewareActions = {
   performCounterReset: () => {},
+  dovuciSalu: () => {},
 };
 
-export const counterSlice = createSlice({
-  name: "counter",
-  initialState: {},
+export const chuckSlice = createSlice({
+  name: "jokes",
+  initialState: {
+    value: {},
+  },
   reducers: {
+    setJokes: (state, action) => {
+      state.value = action.payload;
+    },
     ...middlewareActions,
   },
 });
 
-export const { performCounterReset } = counterSlice.actions;
+export const { performCounterReset, setJokes, dovuciSalu } = chuckSlice.actions;
 
-export default counterSlice.reducer;
+export default chuckSlice.reducer;

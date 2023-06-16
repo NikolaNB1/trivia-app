@@ -1,9 +1,11 @@
-import { put, takeLatest } from "redux-saga/effects";
-import { performCounterReset, reset } from "./slice";
+import { put, takeLatest, call } from "redux-saga/effects";
+import { dovuciSalu, performCounterReset, setJokes } from "./slice";
+import { getJoke } from "../../service/ChuckService";
 
 function* counterHandler() {
   try {
-    yield put(reset());
+    const { data } = yield call(getJoke);
+    yield put(setJokes(data));
   } catch (error) {
     console.log(error);
   }
@@ -11,4 +13,7 @@ function* counterHandler() {
 
 export function* watchResetCounter() {
   yield takeLatest(performCounterReset.type, counterHandler);
+}
+export function* watchDovuciSalu() {
+  yield takeLatest(dovuciSalu.type, counterHandler);
 }
