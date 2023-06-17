@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const middlewareActions = {
   dovuciTriviu: () => {},
-  dovuciKategorije: () => {},
+  dovuciTriviaKategorije: () => {},
 };
 
 export const triviaSlice = createSlice({
@@ -15,7 +15,7 @@ export const triviaSlice = createSlice({
     setTrivia: (state, action) => {
       state.value = action.payload;
     },
-    setCategory: (state, action) => {
+    setTriviaCategory: (state, action) => {
       state.categories = action.payload;
     },
     ...middlewareActions,
@@ -26,8 +26,8 @@ export const {
   performCounterReset,
   setTrivia,
   dovuciTriviu,
-  setCategory,
-  dovuciKategorije,
+  setTriviaCategory,
+  dovuciTriviaKategorije,
 } = triviaSlice.actions;
 
 export default triviaSlice.reducer;

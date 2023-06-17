@@ -24,7 +24,9 @@ const Chuck = () => {
         </button>
       </div>
 
-      <h4 className="m-5">{chuckJokes.value}</h4>
+      <h4 className="m-5" style={{ textAlign: "center" }}>
+        {chuckJokes.value}
+      </h4>
 
       {categories.map((category, id) => {
         return (
