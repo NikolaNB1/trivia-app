@@ -11,7 +11,7 @@ const Chuck = () => {
   useEffect(() => {
     dispatch(dovuciSalu());
     dispatch(dovuciKategorije());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="container">
@@ -20,7 +20,7 @@ const Chuck = () => {
           className="btn btn-secondary"
           onClick={() => dispatch(dovuciSalu())}
         >
-          Get new joke
+          Get random joke
         </button>
       </div>
 

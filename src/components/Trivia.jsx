@@ -1,13 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { selectSetCategory, selectSetTrivia } from "../store/trivia/selectors";
-import { dovuciTriviaKategorije, dovuciTriviu } from "../store/trivia/slice";
+import {
+  selectSetCategory,
+  selectSetTrivia,
+  selectSetValue,
+} from "../store/trivia/selectors";
+import {
+  dovuciTriviaKategorije,
+  dovuciTriviaValue,
+  dovuciTriviu,
+} from "../store/trivia/slice";
 
 const Trivia = () => {
   const dispatch = useDispatch();
   const trivias = useSelector(selectSetTrivia);
   const [showAnswers, setShowAnswers] = useState([]);
   const categories = useSelector(selectSetCategory);
+  const values = useSelector(selectSetValue);
 
   useEffect(() => {
     dispatch(dovuciTriviaKategorije());
@@ -20,11 +29,27 @@ const Trivia = () => {
       (category) => category.id === categoryId
     );
     dispatch(dovuciTriviu(selectedCategory.id));
+    setShowAnswers([]);
+  };
+
+  const handleSearchValue = (event) => {
+    const value = parseInt(event.target.value);
+    if (value) {
+      return dispatch(dovuciTriviaValue(value));
+    }
   };
 
   return (
     <div>
       <div className="container w-25">
+        <div>
+          Search question by value:
+          <input
+            className="form-control"
+            type="number"
+            onChange={handleSearchValue}
+          />
+        </div>
         <h4>Select category: </h4>
         <select className="form-control" onChange={handleCategorySelect}>
           {categories.map((category) => (
@@ -35,7 +60,21 @@ const Trivia = () => {
         </select>
       </div>
       <div className="m-3">
-        {trivias && trivias.length > 0 ? (
+        <ul className="list-group container">
+          {values?.map((value, id) => (
+            <li
+              className="list-group-item list-group-item-success"
+              key={id}
+              onClick={() => setShowAnswers((prevState) => [...prevState, id])}
+            >
+              {value.question}
+              {showAnswers.includes(id) && <p>Answer: {value.answer}</p>}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="m-3">
+        {trivias && values.length === 0 && trivias.length > 0 ? (
           <ul className="list-group container">
             {trivias.map((trivia, id) => (
               <li
@@ -52,7 +91,7 @@ const Trivia = () => {
           </ul>
         ) : (
           <p className="container" style={{ textAlign: "center" }}>
-            No content available.
+            {values.length > 0 ? null : <p>No content available.</p>}
           </p>
         )}
       </div>
